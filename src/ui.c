@@ -26,7 +26,6 @@ bool parseDouble(char *str, double* val) {
     ///Test if there is an error in the input and handle it
     if (*temp == 0)
         return false;
-    printf("here\n");
     return true;
 }
 
