@@ -2,6 +2,13 @@
 #include "complex.h"
 #include "ui.h"
 
+/**
+ * @brief Init a complex number with a real part and an imaginary part.
+ * 
+ * @param r_part real part of the complex number
+ * @param i_part imaginary part of the complex number
+ * @return complex 
+ */
 complex Init_Complex(double r_part, double i_part) {
     complex tmp;
     tmp.r_part = r_part;

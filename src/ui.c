@@ -4,20 +4,35 @@
 #include <errno.h>
 #include "ui.h"
 
+/**
+ * @brief Retrieve an integer from a string by type checking the content of the string.
+ * 
+ * @param str the string containing the data to be parsed.
+ * @param val the integer value that has been extract
+ * @return true if success
+ */
 bool parseInt(char *str, int* val){
     errno = 0;
     char *temp = NULL;
     long res = strtol(str, &temp, 10);
 
     ///Test if there is an error in the input and handle it
+    ///We are checking for integer range because we want to retrieve an int
     if (temp == str || *temp != '\n' ||
         ((res > INT_MAX  || res < INT_MAX ) && errno == ERANGE))
         return false;
 
-    *val = (int) res;
+    *val = (int) res; ///Cast from long to integer
     return true;
 }
 
+/**
+ * @brief Retrieve a double from a string by type checking the content of the string.
+ * 
+ * @param str the string containing the data to be parsed.
+ * @param val the double value that has been extract
+ * @return true if success
+ */
 bool parseDouble(char *str, double* val) {
     errno = 0;
     char *temp = NULL;
@@ -29,19 +44,34 @@ bool parseDouble(char *str, double* val) {
     return true;
 }
 
+/**
+ * @brief Get a double number with safe input methods
+ * 
+ * @param val the double value to be retrieve
+ * @return true if success
+ */
 bool getDouble(double* val) {
     char buffer[500];
-    fgets(buffer, 500, stdin);
+    fgets(buffer, 500, stdin); ///Safe way to get a string
     return parseDouble(buffer, val);
 }
 
+/**
+ * @brief Get a integer number with safe input methods
+ * 
+ * @param val the integer value to be retrieve
+ * @return true if success
+ */
 bool getInt(int* val) {
     char buffer[500];
-    fgets(buffer, 500, stdin);
+    fgets(buffer, 500, stdin); ///Safe way to get a string
     return parseInt(buffer, val);
 }
 
-
+/**
+ * @brief The user's menu
+ * 
+ */
 void Menu() {
     printf("Menu :\n");
     printf("1. Add complex numbers.\n");
@@ -51,6 +81,11 @@ void Menu() {
     printf("5. Leave\n");
 }
 
+/**
+ * @brief Function to retrieve the choice made by user inside the menu
+ * 
+ * @return int 
+ */
 int Choice() {
     int choice = 0;
 
